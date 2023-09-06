@@ -11,26 +11,25 @@ document.getElementById("regBtn").addEventListener("click", function () {
         fechaDeNacimiento : fechaDeNacimiento
     };
 
-    fetch("https://jsonplaceholder.typicode.com/users", {
-        method: "POST",
+    const options = {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json"
+        'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
-    })
-    
-    .then(response => response.json())
-    .then(data => {
-        // Maneja la respuesta del servidor
-        console.log(data);
+        body: JSON.stringify(formData),
+        };
         
+        fetch('https://jsonplaceholder.typicode.com/posts', options)
+  .then(data => {
+      if (!data.ok) {
+        throw Error(data.status);
+       }
+       return data.json();
+      }).then(formData => {
+      console.log(formData);
 
-        
-        
-    })
-    .catch(error => {
-        console.error("Error al enviar los datos:", error);
+
+}).catch(e => {
+    console.log(e);
     });
-
-
 })
